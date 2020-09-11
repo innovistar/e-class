@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 class="heading">Register</h1>
+        
+        <input type="email" name="email" id="inputEmail" class="input" placeholder="Email address" required autofocus>
+
+        <input type="text" name="username" id="inputUsername" class="input" placeholder="Username" required>
+
+        <div id="invalidUsername" style="display: none;"></div>
+  
+        <input type="password" name="password1" id="inputPassword1" class="input" placeholder="Password" required>
+        <small class="input">SHOW</small>
+       
+        {% for field in registration_form %}
+        <p>{% for error in field.errors %}<p style="color: red">{{ error }}</p>{% endfor %}</p>
+        {% endfor %}
+        {% if registration_form.non_field_errors %}
+            <div>
+                <p>{{registration_form.non_field_errors}}</p>
+            </div>
+        {% endif %}
+        <button class="login-btn" type="submit">REGISTER</button>
+    </form>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
+
